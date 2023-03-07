@@ -1,12 +1,15 @@
 class TasksController < ApplicationController
+  # GET All
   def index
     @tasks = Task.all
   end
 
+  # GET a specific task
   def show
     @task = Task.find(params[:id])
   end
 
+  # POST a specific task
   def new
     @task = Task.new
   end
@@ -17,6 +20,7 @@ class TasksController < ApplicationController
     redirect_to task_path(@task)
   end
 
+  # PATCH a specific task
   def edit
     @task = Task.find(params[:id])
   end
@@ -26,6 +30,14 @@ class TasksController < ApplicationController
     @task.update(update_params)
 
     redirect_to task_path(@task)
+  end
+
+  # DELETE a specific task
+  def destroy
+    @task = Task.find(params[:id])
+    @task.destroy
+
+    redirect_to tasks_path, status: :see_other
   end
 
   private
